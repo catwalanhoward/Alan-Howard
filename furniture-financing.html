@@ -1,0 +1,105 @@
+    <style>
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        #results {
+            border: solid 1px #eaeaea;
+            width:100%;
+            padding:10px;
+            max-width:565px;
+        }
+        #loan-calculator{
+            display: flex;
+            font-family: sans-serif;
+        }
+        #loanForm{
+            padding:20px;
+        }
+        .calculate-button{
+            background-color:#FF0176;
+        }
+        
+        @media only screen and (max-width: 600px) {
+            #loan-calculator{
+             display: inline-block;
+            }
+        }
+    </style>
+    <div id="loan-calculator">
+    
+    
+    <form id="loanForm">
+        <h2 style="width:100%; color:#FF0176;">Loan Calculator</h2>
+        <p style="margin-bottom:20px;">Get finance for your salon furniture. Simply enter your loan value in the box below, choose the loan the duration and get an instant quote.</p>
+        <label for="loanAmount">Loan Amount (Minimum £1000): </label>
+        <input type="number" id="loanAmount" min="1000" max="10000" required  style="margin-bottom:20px; padding:10px;min-width:200px;">
+        <label for="loanTerm">Loan Term: </label>
+        <select id="loanTerm" required style="padding:10px;min-width:200px;;">
+            <option value="2">2 years</option>
+            <option value="3">3 years</option>
+            <option value="4">4 years</option>
+            <option value="5">5 years</option>
+        </select>
+<br/>
+
+    </form>
+
+    
+    <div id="results"></div>
+</div>
+<script>
+    // Function to calculate and update results
+    function calculateLoan() {
+        // Get user inputs
+        const loanAmount = parseFloat(document.getElementById("loanAmount").value);
+        const loanTerm = parseInt(document.getElementById("loanTerm").value);
+
+        // Check if inputs are valid
+        if (!isNaN(loanAmount) && loanAmount >= 1000 && loanAmount <= 10000 &&
+            !isNaN(loanTerm) && loanTerm >= 2 && loanTerm <= 5) {
+
+            // Hardcoded interest rates per £1000 for each loan term
+            const interestRates = {2: 49.65, 3: 35.35, 4: 27.95, 5: 23.35};
+
+            // Calculate total interest amount
+            const interestRatePer1000 = interestRates[loanTerm];
+            const totalInterest = (loanAmount / 1000) * interestRatePer1000;
+
+            // Calculate monthly payment amount
+            const monthlyPayment = (loanAmount * interestRatePer1000) / 1000;
+
+            // Calculate weekly amount
+            const weeklyPayment = (monthlyPayment * 12) / 52;
+
+            // Calculate total cost payable
+            const totalCostPayable = monthlyPayment * (loanTerm * 12);
+
+            // Calculate tax relief saving
+            const taxReliefSaving = totalCostPayable * 0.19;
+
+            // Calculate total net cost payable
+            const totalNetCostPayable = totalCostPayable - taxReliefSaving;
+
+            // Display results
+            const resultsDiv = document.getElementById("results");
+            resultsDiv.innerHTML = '<h2>Results</h2>' +
+                '<p>Loan Amount: £' + loanAmount + '</p>' +
+                '<p>Loan Term: ' + loanTerm + ' years</p>' +
+                '<hr style="border: solid #FF0176 1px;">' +
+                '<p style="font-weight:bold;">Total Amount Payable: £' + totalCostPayable.toFixed(2) + '</p>' +
+                '<p>Monthly Payment: £' + monthlyPayment.toFixed(2) + '</p>' +
+                '<p>Weekly Payment: £' + weeklyPayment.toFixed(2) + '</p>' +
+                '<hr style="border: solid #FF0176 1px;">' +
+                '<p>Tax Relief Saving (19%): £' + taxReliefSaving.toFixed(2) + '</p>' +
+                '<p style="font-weight:bold;font-size:18px;color:#ff0176;">Total Net Cost Payable: £' + totalNetCostPayable.toFixed(2) + '</p>';
+        }
+    }
+
+    // Event listeners for input changes
+    document.getElementById("loanAmount").addEventListener("input", calculateLoan);
+    document.getElementById("loanTerm").addEventListener("input", calculateLoan);
+
+    // Initial calculation on page load
+    calculateLoan();
+</script>
