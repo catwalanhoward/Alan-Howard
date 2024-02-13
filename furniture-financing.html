@@ -4,10 +4,12 @@
             margin-bottom: 5px;
         }
         #results {
-            border: solid 1px #eaeaea;
+            box-shadow: 10px 10px 10px #d8d8d8;
+            border: solid 1px #d8d8d8;
             width:100%;
             padding:10px;
             max-width:565px;
+            height: auto;
         }
         #loan-calculator{
             display: flex;
@@ -16,14 +18,17 @@
         #loanForm{
             padding:20px;
         }
-        .calculate-button{
-            background-color:#FF0176;
-        }
         
-        @media only screen and (max-width: 600px) {
+        @media only screen and (max-width: 780px) {
             #loan-calculator{
-             display: inline-block;
+            display: inline-block;
             }
+            #results {
+            box-shadow: 10px 10px 10px #d8d8d8;
+            border: solid 1px #d8d8d8;
+            width:100%;
+            padding:10px;
+            min-height: 373px;
         }
     </style>
     <div id="loan-calculator">
@@ -46,7 +51,7 @@
     </form>
 
     
-    <div id="results"></div>
+    <div id="results"><img src="https://www.alanhoward.co.uk/Images/Editor/furniture-financing-placeholder.jpg" style="max-width: 565px;"></div>
 </div>
 <script>
     // Function to calculate and update results
