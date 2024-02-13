@@ -38,7 +38,7 @@
         <h2 style="width:100%; color:#FF0176;">Leasing Calculator</h2>
         <p style="margin-bottom:20px;">Get finance for your salon furniture. Simply enter your loan value in the box below, choose the loan the duration and get an instant quote.</p>
         <label for="loanAmount">Loan Amount (Minimum £1000): </label>
-        <input type="number" id="loanAmount" min="1000" max="10000" required  style="margin-bottom:20px; padding:10px;min-width:200px;">
+        <input type="number" id="loanAmount" min="1000" required  style="margin-bottom:20px; padding:10px;min-width:200px;">
         <label for="loanTerm">Loan Term: </label>
         <select id="loanTerm" required style="padding:10px;min-width:200px;;">
             <option value="2">2 years</option>
@@ -61,7 +61,7 @@
         const loanTerm = parseInt(document.getElementById("loanTerm").value);
 
         // Check if inputs are valid
-        if (!isNaN(loanAmount) && loanAmount >= 1000 && loanAmount <= 10000 &&
+        if (!isNaN(loanAmount) && loanAmount >= 1000 &&
             !isNaN(loanTerm) && loanTerm >= 2 && loanTerm <= 5) {
 
             // Hardcoded interest rates per £1000 for each loan term
