@@ -49,10 +49,10 @@
             const resultElement = document.getElementById("result");
             
             if (postcodePrefix && allowedPrefixes.includes(postcodePrefix[0])) {
-                resultElement.innerHTML = "Joico is available to your address.<br>\nWe offer a wide range of Joico products for your hair care needs.";
+                resultElement.innerHTML = "Joico is available to your address.";
                 resultElement.className = "available";
             } else {
-                resultElement.innerHTML = "Joico is not available to your address.<br>\nClick here to shop alternatives to Joico.";
+                resultElement.innerHTML = "Joico is not available to your address.";
                 resultElement.className = "unavailable";
             }
             
