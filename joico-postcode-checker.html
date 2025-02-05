@@ -1,68 +1,77 @@
-    <style>
-        .postcode-checker{
-            max-width: 400px;
-            text-align: center;
-            border: solid 1px #EAEAEA;
-        }
-        button {
-            padding: 10px 20px;
-            margin: 5px;
-            font-size: 16px;
-            border-radius: 30px;
-            background-color: #FF0176;
-            color: #FFF;
-            border: none;
-        }
-        input {
-            padding: 10px;
-            margin: 5px;
-            font-size: 16px;
-        }
-        #result {
-            font-size: 16px;
-            margin-top: 10px;
-            padding: 10px;
-            max-width: 400px;
-            white-space: pre-line; /* Allows multiple lines of text */
-            border-radius: 5px;
-        }
-        .available {
-            color: green;
-            font-weight: bold;
-            background-color: #d4edda;
-            border: 1px solid #c3e6cb;
-        }
-        .unavailable {
-            color: red;
-            font-weight: bold;
-            background-color: #f8d7da;
-            border: 1px solid #f5c6cb;
-        }
-    </style>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const allowedPrefixes = ["IM", "BB", "BD", "BL", "CW", "DN", "FY", "HG", "HU", "HX", "LA", "L", "LS", "M", "OL", "PR", "S", "SK", "ST", "SY", "TF", "WA", "WF", "WN", "WV", "WS", "YO", "B", "CA", "DY", "LL", "TS", "ZE", "AB", "DD", "DG", "DH", "DL", "EH", "FK", "G", "IV", "KA", "KW", "KY", "ML", "NE", "PA", "PH", "SR", "TD", "CH", "HD", "E", "NW" ]; // Define your postcode prefixes here
+<style>
+    .postcode-checker{
+        text-align: center;
+        border: solid 1px #EAEAEA;
+        background-color: #F9F9F9;
+        display: inline-block;
+    }
+    button {
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #FF0176;
+        color: #FFF;
+        border: none;
+        width: 100%;
+    }
+    input {
+        padding: 10px;
+        font-size: 16px;
+        width: 100%;
+    }
+    #result {
+        font-size: 16px;
+        margin-top: 10px;
+        padding: 10px;
+        white-space: pre-line; /* Allows multiple lines of text */
+        border-radius: 5px;
+        display: none; /* Initially hidden */
+    }
+    .available {
+        color: green;
+        font-weight: bold;
+        background-color: #d4edda;
+        border: 1px solid #c3e6cb;
+    }
+    .unavailable {
+        color: red;
+        font-weight: bold;
+        background-color: #f8d7da;
+        border: 1px solid #f5c6cb;
+    }
+</style>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const allowedPrefixes = ["IM", "BB", "BD", "BL", "CW", "DN", "FY", "HG", "HU", "HX", "LA", "L", "LS", "M", "OL", "PR", "S", "SK", "ST", "SY", "TF", "WA", "WF", "WN", "WV", "WS", "YO", "B", "CA", "DY", "LL", "TS", "ZE", "AB", "DD", "DG", "DH", "DL", "EH", "FK", "G", "IV", "KA", "KW", "KY", "ML", "NE", "PA", "PH", "SR", "TD", "CH", "HD", "E", "NW" ];
+        
+        document.getElementById("checkButton").addEventListener("click", function () {
+            const postcodeInput = document.getElementById("postcode").value.trim().toUpperCase();
+            const postcodePrefix = postcodeInput.match(/^[A-Z]+/); // Extract prefix (letters only)
+            const resultElement = document.getElementById("result");
             
-            document.getElementById("checkButton").addEventListener("click", function () {
-                const postcodeInput = document.getElementById("postcode").value.trim().toUpperCase();
-                const postcodePrefix = postcodeInput.match(/^[A-Z]+/); // Extract prefix (letters only)
-                const resultElement = document.getElementById("result");
-                
-                if (postcodePrefix && allowedPrefixes.includes(postcodePrefix[0])) {
-                    resultElement.innerHTML = "Joico is available to your address.<br>\nWe offer a wide range of Joico products for your hair care needs.";
-                    resultElement.className = "available";
-                } else {
-                    resultElement.innerHTML = "Joico is not available to your address.<br>\nClick here to shop alternatives to Joico.";
-                    resultElement.className = "unavailable";
-                }
-            });
+            if (postcodePrefix && allowedPrefixes.includes(postcodePrefix[0])) {
+                resultElement.innerHTML = "Joico is available to your address.<br>\nWe offer a wide range of Joico products for your hair care needs.";
+                resultElement.className = "available";
+            } else {
+                resultElement.innerHTML = "Joico is not available to your address.<br>\nClick here to shop alternatives to Joico.";
+                resultElement.className = "unavailable";
+            }
+            
+            resultElement.style.display = "block"; // Show result
         });
-    </script>
+    });
+</script>
 <div class="postcode-checker">
-    <p style="font-size: 24px; color: #FFF; background-color: #FF0176;font-weight: bold; text-align: center; margin:0px; padding: 5px 0px;">Postcode Checker</p>
-    <img src="https://www.alanhoward.co.uk/Images/Editor/joico-logo.jpg" width="200px;">
-    <p style="padding:0px 20px 20px 20px; margin: 0px;">Enter your postcode below to check if Joico is available in your area from Alan Howard.</p>
-    <input type="text" id="postcode" placeholder="Enter postcode">
-    <button id="checkButton">Check Postcode</button>
+    <p style="font-size: 24px; color: #FFF; background-color: #FF0176;font-weight: bold; text-align: center; margin:0px; padding: 5px 0px;">Postcode Checker</p>   
+    <table>
+        <tr>
+            <td style="width: 50%">
+                <p style="padding:10px 10px 10px 5px; margin: 0px;">Postcode restrictions apply to Joico products. Enter your postcode to check if Joico is available in your area from Alan Howard.</p>
+            </td>
+            <td style="width: 25%">    
+                <input type="text" id="postcode" placeholder="Enter postcode">
+            <td>
+                 <button id="checkButton">Check Postcode</button></td>           
+        </tr>
+    </table>
     <p id="result"></p>
-    </div>
+</div>
