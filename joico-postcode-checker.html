@@ -5,12 +5,13 @@
         background-color: #F9F9F9;
         font-family: sans-serif;
     }
-    button {
+    #checkButton {
         padding: 10px 20px;
         font-size: 16px;
         background-color: #FF0176;
         color: #FFF;
         border: none;
+        cursor: pointer;
         width: 100%;
     }
     input {
@@ -18,13 +19,19 @@
         font-size: 16px;
         width: 100%;
     }
+    #result-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        margin-top: 10px;
+    }
     #result {
         font-size: 16px;
-        margin-top: 10px;
         padding: 10px;
-        white-space: pre-line; /* Allows multiple lines of text */
+        white-space: pre-line;
         border-radius: 5px;
-        display: none; /* Initially hidden */
+        display: none;
     }
     .available {
         color: green;
@@ -38,6 +45,15 @@
         background-color: #f8d7da;
         border: 1px solid #f5c6cb;
     }
+    #resetButton {
+        display: none;
+        background-color: #6c757d;
+        padding: 10px 20px;
+        font-size: 16px;
+        color: #FFF;
+        border: none;
+        cursor: pointer;
+    }
 </style>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -45,8 +61,9 @@
         
         document.getElementById("checkButton").addEventListener("click", function () {
             const postcodeInput = document.getElementById("postcode").value.trim().toUpperCase();
-            const postcodePrefix = postcodeInput.match(/^[A-Z]+/); // Extract prefix (letters only)
+            const postcodePrefix = postcodeInput.match(/^[A-Z]+/);
             const resultElement = document.getElementById("result");
+            const resetButton = document.getElementById("resetButton");
             
             if (postcodePrefix && allowedPrefixes.includes(postcodePrefix[0])) {
                 resultElement.innerHTML = "Joico is available to your address.";
@@ -56,12 +73,19 @@
                 resultElement.className = "unavailable";
             }
             
-            resultElement.style.display = "block"; // Show result
+            resultElement.style.display = "block";
+            resetButton.style.display = "block";
+        });
+        
+        document.getElementById("resetButton").addEventListener("click", function () {
+            document.getElementById("postcode").value = "";
+            document.getElementById("result").style.display = "none";
+            this.style.display = "none";
         });
     });
 </script>
 <div class="postcode-checker">
-    <p style="font-size: 24px; color: #FFF; background-color: #FF0176;font-weight: bold; text-align: center; margin:0px; padding: 5px 0px;">Postcode Checker</p>   
+    <p style="font-size: 24px; color: #FFF; background-color: #FF0176; font-weight: bold; text-align: center; margin:0px; padding: 5px 0px;">Postcode Checker</p>   
     <table>
         <tr>
             <td style="width: 50%">
@@ -70,8 +94,12 @@
             <td style="width: 25%">    
                 <input type="text" id="postcode" placeholder="Enter postcode">
             <td>
-                 <button id="checkButton">Check Postcode</button></td>           
+                <button id="checkButton">Check Postcode</button>
+            </td>           
         </tr>
     </table>
-    <p id="result"></p>
+    <div id="result-container">
+        <p id="result"></p>
+        <button id="resetButton">Reset</button>
+    </div>
 </div>
