@@ -1,0 +1,130 @@
+<style>
+    .postcode-checker {
+        text-align: center;
+        border: solid 1px #EAEAEA;
+        background-color: #F9F9F9;
+        font-family: sans-serif;
+        max-width: 1140px;
+        margin: auto;
+        padding: 0px 0px 10px 0px;
+    }
+    #checkButton {
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #FF0176;
+        color: #FFF;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+    }
+    input {
+        padding: 10px;
+        font-size: 16px;
+        width: 100%;
+    }
+    #result-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        margin-top: 10px;
+    }
+    #result {
+        font-size: 16px;
+        padding: 10px;
+        white-space: pre-line;
+        border-radius: 5px;
+        display: none;
+        flex-grow: 1;
+        text-align: center;
+    }
+    .available {
+        color: green;
+        font-weight: bold;
+        background-color: #d4edda;
+        border: 1px solid #c3e6cb;
+    }
+    .unavailable {
+        color: red;
+        font-weight: bold;
+        background-color: #f8d7da;
+        border: 1px solid #f5c6cb;
+    }
+    #resetButton {
+        display: none;
+        background-color: #6c757d;
+        padding: 10px 20px;
+        font-size: 16px;
+        color: #FFF;
+        border: none;
+        cursor: pointer;
+    }
+    .input-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+        align-items: center;
+        padding: 10px 10px 0px 10px;
+    }
+    .input-container input, .input-container button {
+        flex: 1;
+        min-width: 200px;
+    }
+    
+    @media (max-width: 768px) {
+        .input-container {
+            flex-direction: column;
+        }
+        #result-container {
+            flex-direction: column;
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const allowedPrefixes = ["BT", "BB", "BL", "CH", "CW", "FY", "LA", "L1", "L2", "L3", "L4", "L5", "L6", "L7", "L8", "L9", "L0", "LL", "M", "OL", "PR", "SK", "WA", "WN" ];
+        
+        document.getElementById("checkButton").addEventListener("click", function () {
+            const postcodeInput = document.getElementById("postcode").value.trim().toUpperCase();
+            const postcodePrefix = postcodeInput.match(/^[A-Z]+/);
+            const resultElement = document.getElementById("result");
+            const resetButton = document.getElementById("resetButton");
+            
+            if (postcodePrefix && allowedPrefixes.includes(postcodePrefix[0])) {
+                resultElement.innerHTML = "milk_shake is available to your address.";
+                resultElement.className = "available";
+            } else {
+                resultElement.innerHTML = "milk_shake is not available to your address.";
+                resultElement.className = "unavailable";
+            }
+            
+            resultElement.style.display = "block";
+            resetButton.style.display = "block";
+        });
+        
+        document.getElementById("resetButton").addEventListener("click", function () {
+            document.getElementById("postcode").value = "";
+            document.getElementById("result").style.display = "none";
+            this.style.display = "none";
+        });
+    });
+</script>
+
+<center>
+    <div class="postcode-checker">
+        <p style="font-size: 24px; color: #FFF; background-color: #FF0176; font-weight: bold; text-align: center; margin:0px; padding: 5px 0px;">Postcode Checker</p>   
+        <p style="padding:10px 10px 0px 10px; margin: 0px;">Postcode restrictions apply to milk_shake products. Enter your postcode to check if milk_shake is available in your area from Alan Howard.</p>
+        
+        <div class="input-container">
+            <input type="text" id="postcode" placeholder="Enter postcode">
+            <button id="checkButton">Check Postcode</button>
+        </div>
+        
+        <div id="result-container">
+            <p id="result"></p>
+            <button id="resetButton">Reset</button>
+        </div>
+    </div>
+</center>
