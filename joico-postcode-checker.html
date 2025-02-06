@@ -1,10 +1,12 @@
 <style>
-    .postcode-checker{
+    .postcode-checker {
         text-align: center;
         border: solid 1px #EAEAEA;
         background-color: #F9F9F9;
         font-family: sans-serif;
         max-width: 1140px;
+        margin: auto;
+        padding: 0px 0px 10px 0px;
     }
     #checkButton {
         padding: 10px 20px;
@@ -33,6 +35,8 @@
         white-space: pre-line;
         border-radius: 5px;
         display: none;
+        flex-grow: 1;
+        text-align: center;
     }
     .available {
         color: green;
@@ -55,7 +59,29 @@
         border: none;
         cursor: pointer;
     }
+    .input-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+        align-items: center;
+        padding: 10px 10px 0px 10px;
+    }
+    .input-container input, .input-container button {
+        flex: 1;
+        min-width: 200px;
+    }
+    
+    @media (max-width: 768px) {
+        .input-container {
+            flex-direction: column;
+        }
+        #result-container {
+            flex-direction: column;
+        }
+    }
 </style>
+
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const allowedPrefixes = ["IM", "BB", "BD", "BL", "CW", "DN", "FY", "HG", "HU", "HX", "LA", "L", "LS", "M", "OL", "PR", "S", "SK", "ST", "SY", "TF", "WA", "WF", "WN", "WV", "WS", "YO", "B", "CA", "DY", "LL", "TS", "ZE", "AB", "DD", "DG", "DH", "DL", "EH", "FK", "G", "IV", "KA", "KW", "KY", "ML", "NE", "PA", "PH", "SR", "TD", "CH", "HD", "E", "NW" ];
@@ -85,23 +111,20 @@
         });
     });
 </script>
-<center><div class="postcode-checker">
-    <p style="font-size: 24px; color: #FFF; background-color: #FF0176; font-weight: bold; text-align: center; margin:0px; padding: 5px 0px;">Postcode Checker</p>   
-    <table>
-        <tr>
-            <td style="width: 50%">
-                <p style="padding:10px 10px 10px 5px; margin: 0px;">Postcode restrictions apply to Joico products. Enter your postcode to check if Joico is available in your area from Alan Howard.</p>
-            </td>
-            <td style="width: 25%">    
-                <input type="text" id="postcode" placeholder="Enter postcode">
-            <td>
-                <button id="checkButton">Check Postcode</button>
-            </td>           
-        </tr>
-    </table>
-    <div id="result-container">
-        <p id="result"></p>
-        <button id="resetButton">Reset</button>
+
+<center>
+    <div class="postcode-checker">
+        <p style="font-size: 24px; color: #FFF; background-color: #FF0176; font-weight: bold; text-align: center; margin:0px; padding: 5px 0px;">Postcode Checker</p>   
+        <p style="padding:10px 10px 0px 10px; margin: 0px;">Postcode restrictions apply to Joico products. Enter your postcode to check if Joico is available in your area from Alan Howard.</p>
+        
+        <div class="input-container">
+            <input type="text" id="postcode" placeholder="Enter postcode">
+            <button id="checkButton">Check Postcode</button>
+        </div>
+        
+        <div id="result-container">
+            <p id="result"></p>
+            <button id="resetButton">Reset</button>
+        </div>
     </div>
-</div>
 </center>
