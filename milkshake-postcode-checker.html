@@ -84,7 +84,7 @@
         
         document.getElementById("checkButton").addEventListener("click", function () {
             const postcodeInput = document.getElementById("postcode").value.trim().toUpperCase();
-            const postcodePrefix = postcodeInput.match(/^[A-Z]+/);
+            const postcodePrefix = postcodeInput.match(/^[A-Z]{1,2}[0-9]{1,2}/);
             const resultElement = document.getElementById("result");
             const resetButton = document.getElementById("resetButton");
             const inputContainer = document.querySelector(".input-container");
